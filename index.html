@@ -10,6 +10,10 @@
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <!-- EmailJS -->
   <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    // 初始化EmailJS，替换为您的公钥
+    emailjs.init('6105ej4o8V5uQIoAA');
+  </script>
   
   <!-- Custom Tailwind Configuration -->
   <script>
@@ -508,8 +512,6 @@
 
   <!-- JavaScript -->
   <script>
-    // Initialize EmailJS with your public key
-    emailjs.init('6105ej4o8V5uQIoAA');
     
     // Mobile menu toggle
     const menuToggle = document.getElementById('menu-toggle');
@@ -573,58 +575,9 @@
         behavior: 'smooth'
       });
     });
-    
-    // Form submission handling
-    const contactForm = document.getElementById('contact-form');
-    
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const submitButton = contactForm.querySelector('button[type="submit"]');
-      const originalText = submitButton.innerHTML;
-      
-      // Show loading state
-      submitButton.disabled = true;
-      submitButton.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i> Sending...';
-      
-      // Prepare email data
-      const formData = {
-        to_email: '2165959782@qq.com', // 目标邮箱地址
-        from_name: document.getElementById('name').value,
-        from_email: document.getElementById('email').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value
-      };
-      
-      // Send email using EmailJS
-      emailjs.send('service_lyx16oq', 'template_um5k7dq', formData)
-        .then(function(response) {
-          console.log('SUCCESS!', response.status, response.text);
-          
-          // Show success message
-          submitButton.innerHTML = '<i class="fa fa-check mr-2"></i> Message Sent!';
-          
-          // Reset form
-          contactForm.reset();
-          
-          // Restore button after 3 seconds
-          setTimeout(() => {
-            submitButton.disabled = false;
-            submitButton.innerHTML = originalText;
-          }, 3000);
-        }, function(error) {
-          console.log('FAILED...', error);
-          
-          // Show error message
-          submitButton.innerHTML = '<i class="fa fa-exclamation-triangle mr-2"></i> Error Sending!';
-          
-          // Restore button after 3 seconds
-          setTimeout(() => {
-            submitButton.disabled = false;
-            submitButton.innerHTML = originalText;
-          }, 3000);
-        });
-    });
   </script>
+  
+  <!-- 引入外部表单处理脚本 -->
+  <script src="app.js"></script>
 </body>
-</html>  
+</html>
